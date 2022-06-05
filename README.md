@@ -163,6 +163,8 @@ Dado o ataque anterior, quais as implicações, no âmbito legal, de usar MD5/SH
 
 ---
 
+## Exercício 4 - Certificados Digitais
+
 ## Referências
 
 - OpenSSL, [http://www.openssl.org/](http://www.openssl.org/)
