@@ -164,7 +164,11 @@ Dado o ataque anterior, quais as implicações, no âmbito legal, de usar MD5/SH
 ---
 
 ## Exercício 4 - Certificados Digitais
+A certificação digital é bastante usada na distribuição de chaves públicas e consiste na emissão de um certificado digital, por parte de uma entidade emissora confiável, que associa uma determinada entidade a uma chave pública, o que permite assegurar dois principios vitais da comunicação em redes informáticas, a autenticação e o não-repúdio.
+Este exercício consiste na análise de um certicado digital do tipo X.509, focando nalguns aspetos essenciais da certificação digital, e na sua cadeia de distribuição.
+Para isso usaremos o ficheiro ulisboa.crt que contém um certificado digital descarregado a partir da página web da Universidade de Lisboa, que implementa o protocolo https e por isso usa a certificação digital para se autenticar perante os seus visitantes. 
 
+1. Comece por abrir o ficheiro "ulisboa.crt" e analise os seus conteúdos.
 ## Referências
 
 - OpenSSL, [http://www.openssl.org/](http://www.openssl.org/)
