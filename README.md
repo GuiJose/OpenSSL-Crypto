@@ -164,11 +164,31 @@ Dado o ataque anterior, quais as implicações, no âmbito legal, de usar MD5/SH
 ---
 
 ## Exercício 4 - Certificados Digitais
-A certificação digital é bastante usada na distribuição de chaves públicas e consiste na emissão de um certificado digital, por parte de uma entidade emissora confiável, que associa uma determinada entidade a uma chave pública, o que permite assegurar dois principios vitais da comunicação em redes informáticas, a autenticação e o não-repúdio.
+A certificação digital é bastante usada na distribuição de chaves públicas e consiste na emissão de um certificado digital, por parte de uma Entidade Certificadora (EC) confiável, que associa uma determinada entidade a uma chave pública, o que permite assegurar dois principios vitais da comunicação em redes informáticas, a autenticação e o não-repúdio.
 Este exercício consiste na análise de um certicado digital do tipo X.509, focando nalguns aspetos essenciais da certificação digital, e na sua cadeia de distribuição.
 Para isso usaremos o ficheiro ulisboa.crt que contém um certificado digital descarregado a partir da página web da Universidade de Lisboa, que implementa o protocolo https e por isso usa a certificação digital para se autenticar perante os seus visitantes. 
 
-1. Comece por abrir o ficheiro "ulisboa.crt" e analise os seus conteúdos.
+Comece por abrir o ficheiro "ulisboa.crt" e analise os seus conteúdos.
+
+1. Que entidade produziu o certicado? Para que entidade foi o certicado produzido e qual a sua chave pública?
+
+Os certificados têm tempo de validade limitado, tempo esse controlado de 2 formas possíveis: através de datas indicadas nos próprio certificado, ou através da emissão de um certificado de revogação. Um certificado de revogação é um certificado válido emitido por uma EC, onde se estabelece que a associação entre uma entidade e uma chave pública deixa de ser válida.
+
+2. A partir de que data o certificado ficou válido? E a partir de que data a validade do certificado expira?
+
+3. Qual é a assinatura digital do certificado? Que algoritmos foram usados no cálculo desta assinatura?
+Qual é a necessidade de haver uma assinatura digital no certificado?
+
+4. Que chave foi usada para assinar este certificado? 
+Que chave precisa o importador do certificado de ter, para validar a assinatura digital do certificado?
+
+Imaginemos que a Entidade Certificadora produziu este certificado
+O facto de o importador do certificado precisar de ter a chave pública da EC X para validar a assinatura digital, é preciso que se obtenha o certificado de chave pública da EC X emitido por outra EC Y, é preciso ter o certificado de chave pública da EC Y por outra EC Z, e assim sucessivamente. A validação de todos os certificados usando chaves públicas por outros certificados é chamada de cadeia de certificação. O processo de validar um certificado implica que se valide toda esta cadeia que termina quando se atinge um certificado autocertificado, por uma EC com chave pública conhecida.
+
+Falta acabar isto das cadeias. Lembrei me de analisar os certificados que vêm com o browser ou com o sistema operativo. No ubuntu vêm na pasta /etc/ssl/certs.
+
+Li tbm sobre um ataque que se calhar era fixe falar, ou pelo menos mencionar.
+
 ## Referências
 
 - OpenSSL, [http://www.openssl.org/](http://www.openssl.org/)
