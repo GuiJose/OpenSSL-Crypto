@@ -185,9 +185,11 @@ Que chave precisa o importador do certificado de ter, para validar a assinatura 
 Imaginemos que a Entidade Certificadora produziu este certificado
 O facto de o importador do certificado precisar de ter a chave pública da EC X para validar a assinatura digital, é preciso que se obtenha o certificado de chave pública da EC X emitido por outra EC Y, é preciso ter o certificado de chave pública da EC Y por outra EC Z, e assim sucessivamente. A validação de todos os certificados usando chaves públicas por outros certificados é chamada de cadeia de certificação. O processo de validar um certificado implica que se valide toda esta cadeia que termina quando se atinge um certificado autocertificado, por uma EC com chave pública conhecida.
 
-Falta acabar isto das cadeias. Lembrei me de analisar os certificados que vêm com o browser ou com o sistema operativo. No ubuntu vêm na pasta /etc/ssl/certs.
+É possível analisar a cadeia de certificação de um certificado e ver todos os certificados que a formam. No windows, basta abrir o certificado e abrir o separador "Caminho da certificação". Numa distribuição linux pode ...
 
-Li tbm sobre um ataque que se calhar era fixe falar, ou pelo menos mencionar.
+5. Quantos certificados formam a cadeia de certificação? Quantos certificados intermédios existem? Qual é o certificado-raíz?
+
+6. Para cada certificado verifique o emissor do certificado e a entidade para a qual o certificado foi criado. Que EC emitiu o certificado-raíz?
 
 ## Referências
 
