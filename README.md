@@ -182,7 +182,7 @@ Qual é a necessidade de haver uma assinatura digital no certificado?
 4. Que chave foi usada para assinar este certificado? 
 Que chave precisa o importador do certificado de ter, para validar a assinatura digital do certificado?
 
-Imaginemos que a Entidade Certificadora produziu este certificado
+Imaginemos que a Entidade Certificadora X produziu este certificado.
 O facto de o importador do certificado precisar de ter a chave pública da EC X para validar a assinatura digital, é preciso que se obtenha o certificado de chave pública da EC X emitido por outra EC Y, é preciso ter o certificado de chave pública da EC Y por outra EC Z, e assim sucessivamente. A validação de todos os certificados usando chaves públicas por outros certificados é chamada de cadeia de certificação. O processo de validar um certificado implica que se valide toda esta cadeia que termina quando se atinge um certificado autocertificado, por uma EC com chave pública conhecida.
 
 É possível analisar a cadeia de certificação de um certificado e ver todos os certificados que a formam. No windows, basta abrir o certificado e abrir o separador "Caminho da certificação". Numa distribuição linux pode ...
@@ -190,6 +190,14 @@ O facto de o importador do certificado precisar de ter a chave pública da EC X 
 5. Quantos certificados formam a cadeia de certificação? Quantos certificados intermédios existem? Qual é o certificado-raíz?
 
 6. Para cada certificado verifique o emissor do certificado e a entidade para a qual o certificado foi criado. Que EC emitiu o certificado-raíz?
+
+Para que a validação de toda a cadeia possa ocorrer, os certificado-raíz confiáveis e os certificados intermediarios são guardados nos próprios sistemas operativos, ou muitas vezes, estão embutidos em software, como é o caso dos browsers.
+No caso dos sistemas operativos, os certificados são guardados em ficheiros protegidos com permissões especiais, sendo possível modificar se tiver permissões para isso.
+É possível visualizar os certificados, escrevendo "certmgr.msc" na powershell, ou pesquisar "cert" no ícone de pesquisa e selecionar a opção "Gerir certificados de utilizador", no caso do windows, ou na pasta /etc/ssl/certs no caso de uma distribuição linux.
+
+Também é possível ver os certificados guardados num browser. No caso do google chrome, é possível acedendo a definições -> privacidade e segurança -> segurança -> gerir certificados.
+
+7. Tente encontrar os certificados da cadeia, no seu browser e no seu sistema operativo.
 
 ## Referências
 
