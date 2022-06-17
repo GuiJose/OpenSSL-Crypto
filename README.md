@@ -164,15 +164,31 @@ Dado o ataque anterior, quais as implicações, no âmbito legal, de usar MD5/SH
 ---
 
 ## Exercício 4 - Certificados Digitais
-A certificação digital é bastante usada na distribuição de chaves públicas e consiste na emissão de um certificado digital, por parte de uma Entidade Certificadora (EC) confiável, que associa uma determinada entidade a uma chave pública, o que permite assegurar dois principios vitais da comunicação em redes informáticas, a autenticação e o não-repúdio.
-Este exercício consiste na análise de um certicado digital do tipo X.509, focando nalguns aspetos essenciais da certificação digital, e na sua cadeia de distribuição.
-Para isso usaremos o ficheiro ulisboa.crt que contém um certificado digital descarregado a partir da página web da Universidade de Lisboa, que implementa o protocolo https e por isso usa a certificação digital para se autenticar perante os seus visitantes. 
 
-Comece por abrir o ficheiro "ulisboa.crt" e analise os seus conteúdos.
+A certificação digital é bastante usada na distribuição de chaves públicas e consiste na emissão de um certificado digital, por parte de uma Entidade Certificadora (EC) confiável, que associa uma determinada entidade a uma chave pública, o que permite assegurar dois principios vitais da comunicação em redes informáticas: a autenticação (uma entidade pode provar que é quem diz ser) e o não-repúdio (uma entidade não pode negar ter realizado uma ação).
+Este exercício consiste na análise de um certicado digital do tipo X.509, focando nalguns aspetos essenciais da certificação digital, e na sua cadeia de distribuição.
+Para isso usaremos o ficheiro `ulisboa.crt` que contém um certificado digital descarregado a partir da página *web* da Universidade de Lisboa, que implementa o protocolo HTTPS e por isso usa a certificação digital para se autenticar perante os seus visitantes.
+
+Comece por abrir o ficheiro `ulisboa.crt` e analise os seus conteúdos.
+
+Se editar com um editor de texto, o que vai ver terá o seguinte aspeto.
+
+```
+-----BEGIN CERTIFICATE-----
+MIIHiTCCBXGgAwIBAgIQUq5qBoTj1FkUpDQAuWd8ODANBgkqhkiG9w0BAQwFADBE
+...
+HwPfhh43Wj/72c6h9g==
+-----END CERTIFICATE-----
+```
+
+No Windows, abra com o Explorer, e depois fazendo duplo-clique no ícone do ficheiro.
+
+Em Linux, ... TODO
 
 1. Que entidade produziu o certicado? Para que entidade foi o certicado produzido e qual a sua chave pública?
 
-Os certificados têm tempo de validade limitado, tempo esse controlado de 2 formas possíveis: através de datas indicadas nos próprio certificado, ou através da emissão de um certificado de revogação. Um certificado de revogação é um certificado válido emitido por uma EC, onde se estabelece que a associação entre uma entidade e uma chave pública deixa de ser válida.
+Os certificados têm um prazo de validade limitado.
+O tempo de duração do certificado é controlado de 2 formas: através de datas indicadas nos próprio certificado, ou através da emissão de um certificado de revogação. Um certificado de revogação é um certificado válido emitido por uma EC, onde se estabelece que a associação entre uma entidade e uma chave pública deixa de ser válida.
 
 2. A partir de que data o certificado ficou válido? E a partir de que data a validade do certificado expira?
 
@@ -182,22 +198,37 @@ Qual é a necessidade de haver uma assinatura digital no certificado?
 4. Que chave foi usada para assinar este certificado? 
 Que chave precisa o importador do certificado de ter, para validar a assinatura digital do certificado?
 
+<!-- colocar resposta aqui, dentro de comentários -->
+
 Imaginemos que a Entidade Certificadora X produziu este certificado.
-O facto de o importador do certificado precisar de ter a chave pública da EC X para validar a assinatura digital, é preciso que se obtenha o certificado de chave pública da EC X emitido por outra EC Y, é preciso ter o certificado de chave pública da EC Y por outra EC Z, e assim sucessivamente. A validação de todos os certificados usando chaves públicas por outros certificados é chamada de cadeia de certificação. O processo de validar um certificado implica que se valide toda esta cadeia que termina quando se atinge um certificado autocertificado, por uma EC com chave pública conhecida.
+O facto de o importador do certificado precisar de ter a chave pública da EC X para validar a assinatura digital, é preciso que se obtenha o certificado de chave pública da EC X emitido por outra EC Y, é preciso ter o certificado de chave pública da EC Y, por outra EC Z, e assim sucessivamente, até chegar a uma EC de raíz.
+A validação de todos os certificados usando chaves públicas por outros certificados é chamada de cadeia de certificação. 
+O processo de validar um certificado implica que se valide toda esta cadeia que termina quando se atinge um certificado autocertificado, por uma EC com chave pública conhecida.
 
-É possível analisar a cadeia de certificação de um certificado e ver todos os certificados que a formam. No windows, basta abrir o certificado e abrir o separador "Caminho da certificação". Numa distribuição linux pode ...
+É possível analisar a cadeia de certificação de um certificado e ver todos os certificados que a formam. No Windows, basta abrir o certificado e abrir o separador "Caminho da certificação". 
+Numa distribuição Linux pode ...
 
-5. Quantos certificados formam a cadeia de certificação? Quantos certificados intermédios existem? Qual é o certificado-raíz?
+5. Quantos certificados formam a cadeia de certificação? Quantos certificados intermédios existem? 
+Qual é o certificado-raíz?
 
-6. Para cada certificado verifique o emissor do certificado e a entidade para a qual o certificado foi criado. Que EC emitiu o certificado-raíz?
+6. Para cada certificado verifique o emissor do certificado e a entidade para a qual o certificado foi criado. 
+Que EC emitiu o certificado-raíz?
 
-Para que a validação de toda a cadeia possa ocorrer, os certificado-raíz confiáveis e os certificados intermediarios são guardados nos próprios sistemas operativos, ou muitas vezes, estão embutidos em software, como é o caso dos browsers.
+Para que a validação de toda a cadeia possa ocorrer, os certificado-raíz confiáveis e os certificados intermediarios são guardados nos próprios sistemas operativos, ou muitas vezes, são incluidos no *software*, como é o caso de alguns *web browsers*.
 No caso dos sistemas operativos, os certificados são guardados em ficheiros protegidos com permissões especiais, sendo possível modificar se tiver permissões para isso.
-É possível visualizar os certificados, escrevendo "certmgr.msc" na powershell, ou pesquisar "cert" no ícone de pesquisa e selecionar a opção "Gerir certificados de utilizador", no caso do windows, ou na pasta /etc/ssl/certs no caso de uma distribuição linux.
+É possível visualizar os certificados, escrevendo "certmgr.msc" na powershell, ou pesquisar "cert" no ícone de pesquisa e selecionar a opção "Gerir certificados de utilizador", no caso do Windows, ou na pasta /etc/ssl/certs no caso de uma distribuição Linux.
 
-Também é possível ver os certificados guardados num browser. No caso do google chrome, é possível acedendo a definições -> privacidade e segurança -> segurança -> gerir certificados.
+Também é possível ver os certificados guardados num *browser*. No caso do Firefox, é possível acedendo a definições -> privacidade e segurança -> segurança -> gerir certificados.
 
-7. Tente encontrar os certificados da cadeia, no seu browser e no seu sistema operativo.
+MP - colocar também em inglês
+
+MP - o Google Chrome agora usa a keystore do sistema operativo
+
+7. Tente encontrar os certificados da cadeia, no seu *browser* e no seu sistema operativo.
+
+MP - este ponto 7 é muito vago. Explicar melhor o que se pretende.
+
+MP - adicionar *screenshots* dos diálogos mais importantes
 
 ## Referências
 
