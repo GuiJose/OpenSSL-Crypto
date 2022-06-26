@@ -201,7 +201,7 @@ O tempo de duração do certificado é controlado de 2 formas: através de datas
 
 <!-- Ficou válido desde 04/04/2022 e fica válido até 05/04/2023-->
 
-3.Que algoritmos foram usados no cálculo da assinatura digital do certificado? Qual é a necessidade de haver uma assinatura digital no certificado?
+3. Que algoritmos foram usados no cálculo da assinatura digital do certificado?  Qual é a necessidade de haver uma assinatura digital no certificado?
 
 <!--O algoritmo de digest da assinatura usado foi o sha384 e o algoritmo de chaves assimétricas foi o RSA. Tem que haver uma assinatura digital por parte de uma CA globalmente conhecida para a chave pública dessa entidade a quem foi emitida o ceritificado ser credível fazendo com qualquer pessoa que aceda a este ceritifcado saiba que essa chave públic é dessa entidade.-->
 
